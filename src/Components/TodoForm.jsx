@@ -7,10 +7,23 @@ export const TodoForm = ({onAddTodo}) => {
     };
 
     const handleformSubmit = (event) => {
-        event.preventDefault();
-        onAddTodo(inputValue);
-        setinputvalue({id: '', content: '', checked: false})
-    };
+    event.preventDefault();
+
+    const trimmedContent = inputValue.content.trim();
+
+    if (!trimmedContent) return;
+
+    onAddTodo({
+        ...inputValue,
+        content: trimmedContent,
+    });
+
+    setinputvalue({
+        id: '',
+        content: '',
+        checked: false,
+    });
+};
 
     return (
          <section className='form'>
